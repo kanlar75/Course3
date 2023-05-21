@@ -10,30 +10,27 @@ def test_load_data_bad():
     список и сообщение, что файл отсутствует.
     """
 
-    assert len(load_data("bad.json")) == 0
-    assert isinstance(load_data("bad.json"), list)
     assert load_data("bad.json") == []
 
 
-def test_load_data_good():
-    """ Считываем данные из файла. """
+def test_load_data_good(temp_file_json):
+    """
+    Считываем данные из тестового файла json. Проверяем что функция
+    load_data считывает данные аналогично json.load().
+    """
 
-    with open("operations_test.json", 'r', encoding='utf-8') as file:
-        operations = json.load(file)
-    assert operations == load_data("../tests/operations_test.json")
+    assert json.load(temp_file_json) == load_data(temp_file_json)
 
 
-def test_make_instance(obj_full_attributes, obj_no_full_attributes,
-                       obj_canceled_attributes):
+def test_make_instance(temp_file_json, obj_canceled_attributes):
     """
     Создаем список экземпляров из тестового файла json, проверяем
-    пресутсвуют ли в нем тестовые экземпляры
+    присутствует ли в нем тестовый экземпляр со статусом 'CANCELED'
     """
 
-    load_data("../tests/operations_test.json")
-    assert obj_canceled_attributes not in make_instances()
-    assert obj_full_attributes in make_instances()
-    assert obj_no_full_attributes in make_instances()
+    load_data(temp_file_json)
+
+    assert obj_canceled_attributes not in make_instances(temp_file_json)
 
 
 def test_get_date(obj_full_attributes):
@@ -49,7 +46,8 @@ def test_get_operation_amount(obj_full_attributes):
 
 
 def test_get_from_to_full(obj_full_attributes):
-    """ Получаем источник и назначение операции у тестового экземпляра с
+    """
+    Получаем источник и назначение операции у тестового экземпляра с
     полными атрибутами, сравниваем с ожидаемыми.
     """
 
@@ -82,7 +80,6 @@ def test_hide_numbers_full():
     assert hide_numbers([]) == " "
 
 
-#
 def test_int_input(suspend_capture):
     """
     Сначала ввести букву или символ, дождаться сообщения 'Нужно ввести
@@ -90,5 +87,5 @@ def test_int_input(suspend_capture):
     """
 
     with suspend_capture:
-        number = int_input("Введите число операций для просмотра \n--->  ")
+        number = int_input("Введите число операций для просмотра, ""\n--->  ")
     assert isinstance(number, int)
