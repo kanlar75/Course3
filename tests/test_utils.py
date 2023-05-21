@@ -46,7 +46,8 @@ def test_get_operation_amount(obj_full_attributes):
 
 
 def test_get_from_to_full(obj_full_attributes):
-    """ Получаем источник и назначение операции у тестового экземпляра с
+    """
+    Получаем источник и назначение операции у тестового экземпляра с
     полными атрибутами, сравниваем с ожидаемыми.
     """
 
@@ -86,7 +87,5 @@ def test_int_input(suspend_capture):
     """
 
     with suspend_capture:
-        number = int_input("Введите число операций для просмотра, "
-                           "сначала символ, затем число, для полного покрытия "
-                           "\n--->  ")
+        number = int_input("Введите число операций для просмотра, ""\n--->  ")
     assert isinstance(number, int)
