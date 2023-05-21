@@ -22,7 +22,9 @@ def test_load_data_good(temp_file_json):
     assert json.load(temp_file_json) == load_data(temp_file_json)
 
 
-def test_make_instance(temp_file_json, obj_canceled_attributes):
+def test_make_instance(temp_file_json, obj_full_attributes,
+                       obj_no_full_attributes,
+                       obj_canceled_attributes):
     """
     Создаем список экземпляров из тестового файла json, проверяем
     присутствует ли в нем тестовый экземпляр со статусом 'CANCELED'
@@ -31,6 +33,10 @@ def test_make_instance(temp_file_json, obj_canceled_attributes):
     load_data(temp_file_json)
 
     assert obj_canceled_attributes not in make_instances(temp_file_json)
+    assert obj_full_attributes in make_instances(temp_file_json)
+    assert obj_no_full_attributes in make_instances(temp_file_json)
+    assert len(make_instances(temp_file_json)) > 0
+
 
 
 def test_get_date(obj_full_attributes):
