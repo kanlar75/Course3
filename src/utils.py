@@ -1,5 +1,4 @@
 import json
-
 from datetime import datetime
 
 from src.operation import Operation
@@ -34,14 +33,14 @@ def load_data(path=file_name):
         return []
 
 
-def make_instances():
+def make_instances(path=file_name):
     """
     Возвращает список экземпляров класса Operation с успешным статусом
     'EXECUTED'. Данные считываются из файла и раскладываются в экземпляры
     класса Operation. Все экземпляры добавляются в список, который сортируется
     по убыванию даты.
     """
-    operations = load_data()
+    operations = load_data(path)
     operations_list = []
     field = 'operationAmount'
 
