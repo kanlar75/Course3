@@ -56,12 +56,10 @@ def suspend_capture(pytestconfig):
 
 
 @pytest.fixture(scope='module')
-def temp_file_json(tmpdir_factory):
-    """
-    Записываем тестовые данные в файл 'test.json' во временной
-    директории.
-    """
-    temp_data = [
+def json_data():
+
+    """ Содержит данные json для тестов. """
+    json_ = [
         {
             "id": 41428829,
             "state": "EXECUTED",
@@ -137,6 +135,16 @@ def temp_file_json(tmpdir_factory):
             "to": "Счет 86655182730188443980"
         }
     ]
+    return json_
+
+
+@pytest.fixture(scope='module')
+def temp_file_json(tmpdir_factory, json_data):
+    """
+    Записываем тестовые данные в файл 'test.json' во временной
+    директории.
+    """
+    temp_data = json_data
     file = tmpdir_factory.mktemp('data').join('test.json')
 
     with file.open('w') as f:
