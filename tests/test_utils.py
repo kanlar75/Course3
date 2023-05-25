@@ -34,7 +34,7 @@ def test_make_instance(temp_file_json, obj_full_attributes,
     отсутствующим полем 'from'.
     """
 
-    load_data(temp_file_json)
+    # load_data(temp_file_json)
 
     assert obj_canceled_attributes not in make_instances(temp_file_json)
     assert obj_full_attributes in make_instances(temp_file_json)
