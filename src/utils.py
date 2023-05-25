@@ -16,7 +16,7 @@ def int_input(text):
         try:
             num = int(input(text))
         except ValueError:
-            print("Нужно ввести ЧИСЛО операций")
+            print("\033[1;31mНужно ввести ЧИСЛО операций \033[0m")
         else:
             return num
 
