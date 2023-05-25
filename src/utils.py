@@ -29,7 +29,8 @@ def load_data(path=file_name):
             operations = json.load(file)
         return operations
     except FileNotFoundError:
-        print(f'Файл с банковскими операциями "{path}" отсутствует! ')
+        print(f'\033[1;31mФайл с банковскими операциями "{path}" '
+              f'отсутствует! ')
         return []
 
 
